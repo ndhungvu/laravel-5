@@ -14,4 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/admin',array('as'=>'admin.dashboard', 'uses'=> 'AdminController@index'));
+
+/*Login - Logout admin*/
+Route::group(array('namespace' => 'Admin'), function () {
+	Route::get('/admin/login', array('as'=>'admin.login', 'uses'=>'UserController@getLogin'));
+	Route::post('/admin/login','UserController@postLogin');
+	Route::get('/admin/logout',array('as'=>'admin.logout', 'uses'=>'UserController@getLogout'));
+});
+
+/*Admin pages*/
+Route::group(array('before' => 'auth'), function() {
+	Route::get('/admin',array('as'=>'admin.dashboard', 'uses'=> 'AdminController@index'));
+
+	Route::group(array('prefix' => 'admin', 'namespace' => 'Admin'), function () {
+
+	});
+});
