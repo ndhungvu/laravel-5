@@ -29,15 +29,15 @@
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-            @include('admin.masters.header')
+            @include('masters.admin.header')
             <!-- Left side column. contains the logo and sidebar -->
-            @include('admin.masters.sliderbar')
+            @include('masters.admin.sliderbar')
             <!-- Content Wrapper. Contains page content -->
           <div class="content-wrapper">
                @yield('content')
           </div><!-- /.content-wrapper -->
 
-            @include('admin.masters.footer')
+            @include('masters.admin.footer')
         </div><!-- ./wrapper -->
         <!-- jQuery 2.1.4 -->
         {!! HTML::script('/assets/admin/plugins/jQuery/jQuery-2.1.4.min.js'); !!}

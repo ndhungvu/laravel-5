@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+
 class UserController extends Controller
 {
     /**
@@ -14,75 +19,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        echo 'index'; exit;
     }
 
     public function getLogin() {
@@ -105,7 +44,7 @@ class UserController extends Controller
             return Redirect::back()->withErrors($valid);
         }
 
-        if (Auth::attempt(array('email' => $input['email'], 'password' => $input['password'], 'status' => 1, 'group_id'=> 1))){
+        if (Auth::attempt(array('email' => $input['email'], 'password' => $input['password'], 'is_admin'=> 1, 'deleted_at'=> NULL))){
             $user = Auth::user();
             return Redirect::route('admin.dashboard')->with('flashSuccess', 'You are now logged in');
         }
@@ -114,6 +53,6 @@ class UserController extends Controller
 
     public function getLogout() {
         Auth::logout();
-        Return Redirect::route('admin.user.login');
+        return Redirect::route('admin.login');
     }
 }

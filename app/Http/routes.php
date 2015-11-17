@@ -26,7 +26,7 @@ Route::group(array('namespace' => 'Admin'), function () {
 Route::group(array('before' => 'auth'), function() {
 	Route::get('/admin',array('as'=>'admin.dashboard', 'uses'=> 'AdminController@index'));
 
-	Route::group(array('prefix' => 'admin', 'namespace' => 'Admin'), function () {
-
+	Route::group(array('namespace' => 'Admin'), function () {
+		Route::get('/admin/users',array('as'=>'admin.users','uses'=>'UserController@getIndex'));
 	});
 });

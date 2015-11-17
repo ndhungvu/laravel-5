@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+
 class AdminController extends Controller
 {
     /**
@@ -16,7 +21,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        if(Auth::check()) {
+            return view('admin.dashboard');
+        }
+        return Redirect::route('admin.login');
+        
     }
 
     /**
