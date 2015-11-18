@@ -27,6 +27,13 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('/admin',array('as'=>'admin.dashboard', 'uses'=> 'AdminController@index'));
 
 	Route::group(array('namespace' => 'Admin'), function () {
+		/*---Users---*/
 		Route::get('/admin/users',array('as'=>'admin.users','uses'=>'UserController@getIndex'));
+		Route::get('/admin/user/detail/{id}',array('as'=>'admin.user.detail','uses'=>'UserController@getDetail'));
+		Route::get('/admin/user/create',array('as'=>'admin.user.create','uses'=>'UserController@getCreate'));
+		Route::get('/admin/user/edit/{id}',array('as'=>'admin.user.edit','uses'=>'UserController@getEdit'));
+		Route::post('/admin/user/delete/{id}',array('as'=>'admin.user.delete','uses'=>'UserController@postDelete'));
+		Route::post('/admin/user/deleteAll','UserController@postDeleteAll');
 	});
+
 });

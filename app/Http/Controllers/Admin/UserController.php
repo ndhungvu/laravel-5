@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
+use App\User;
 
 class UserController extends Controller
 {
@@ -21,7 +22,38 @@ class UserController extends Controller
      */
     public function getIndex()
     {
-        echo 'index'; exit;
+        /*Get users*/
+        $users = User::whereNull('deleted_at')->paginate(15);
+        return View('admin.users.index', compact('users'));
+    }
+
+    public function getDetail($id) {
+        $user = User::find($id);
+        return View('admin.users.detail',compact('user'));
+    }
+
+    public function getCreate() {
+
+    }
+
+    public function postCreate() {
+
+    }
+
+    public function getEdit() {
+        
+    }
+
+    public function postEdit() {
+        
+    }
+
+    public function postDelete() {
+        
+    }
+
+    public function postDeleteAll() {
+        
     }
 
     public function getLogin() {
